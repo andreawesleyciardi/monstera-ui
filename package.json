@@ -2,7 +2,7 @@
 	"name": "monstera-ui",
 	"author": "Andrea Wesley Ciardi",
 	"private": false,
-	"version": "2.0.5",
+	"version": "2.0.6",
 	"type": "module",
 	"main": "dist/main.js",
 	"types": "dist/main.d.ts",

@@ -19,7 +19,7 @@ const Root = styled(MuiChip, {
 	})
 );
 
-export const Chip = React.forwardRef<HTMLDivElement | HTMLAnchorElement, ChipProps>(function Chip(
+export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(function Chip(
 	inProps,
 	ref
 ) {
@@ -53,6 +53,7 @@ export const Chip = React.forwardRef<HTMLDivElement | HTMLAnchorElement, ChipPro
 				onDelete != null ? (e) => onDelete(e, index ?? (props.label as string)) : undefined
 			}
             ownerState={ownerState}
+            ref={ref}
 		/>
 	);
 });

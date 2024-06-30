@@ -1,74 +1,59 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useCallback } from 'react';
-import { Box, Stack } from '@mui/material';
-import { ThemeProvider } from './../../../../../providers';
+import { useForm } from 'react-hook-form';
 
-import { Controller, useForm, useFormState } from 'react-hook-form';
+import { TextField } from './TextField';
 
-import { TextField as TextFieldComponent } from './TextField';
-
-const Template = (args) => {
-	const { register, handleSubmit, control, formState, watch, setValue } =
-		useForm({ mode: 'onChange', defaultValues: {} });
-	const extraFormState = useFormState({ control });
-
-	return (
-		<Stack
-			sx={{
-				bgcolor: '#f3f3f5',
-				display: 'flex',
-				gap: '1.5rem',
-				alingItems: 'center',
-				justifyContent: 'center',
-				minHeight: '200px',
-				p: 3,
-				paddingBottom: '400px',
-			}}
-		>
-			<Box
-				sx={{
-					bgcolor: '#ffffff',
-					p: 2,
-					width: '25%',
-				}}
-			>
-				<form
-					method={'post'}
-					onSubmit={(event) => {
-						const target = event.currentTarget;
-						handleSubmit(() => {
-							debugger;
-							// submit(target, { method: method });
-						})(event);
-					}}
-				>
-					<TextFieldComponent
-						control={control}
-						label="Test"
-						name="test"
-						placeholder="Placeholder"
-						{...args}
-					/>
-				</form>
-			</Box>
-		</Stack>
-	);
-};
-
-const meta: Meta<typeof TextFieldComponent> = {
-	title: 'UXXX/Components/Atoms/Inputs',
-	component: TextFieldComponent,
-	decorators: [
-		(Story) => (
-			<ThemeProvider>
-				<Story />
-			</ThemeProvider>
-		),
-	],
-};
+// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+const meta = {
+	title: 'Components/Atoms/UX/TextField',
+	component: TextField,
+    decorators: [
+        (Story) => {
+            const { handleSubmit, control, formState, watch } = useForm({ mode: 'onChange', defaultValues: { test: 'xxx' }});
+            return (
+                <form
+                    method={'post'}
+                    onSubmit={(event) => {
+                        // const target = event.currentTarget;
+                        handleSubmit(() => {
+                            debugger;
+                            // submit(target, { method: method });
+                        })(event);
+                    }}
+                >
+                        <Story control={control} />
+                        <br />
+                        <br />Field current value: { JSON.stringify(watch('test'), null, "\t") }
+                        <br />Form dirty fields: { JSON.stringify(formState.dirtyFields, null, "\t") }
+                        <br />Form errors: { JSON.stringify(formState.errors, null, "\t") }
+                </form>
+        )},
+    ],
+	parameters: {
+		
+	},
+    args: {
+        label: 'Test',
+        name: 'test',
+        placeholder: 'Placeholder'
+    },
+	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+	argTypes: {
+        label: { control: 'text' },
+		name: { control: 'text' },
+		placeholder: { control: 'text' },
+	},
+} satisfies Meta<typeof TextField>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-type Story = StoryObj<typeof TextFieldComponent>;
-
-export const TextField = Template.bind({});
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+export const Base: Story = {
+	args: {
+        // defaultValue: 'default value'
+	},
+    render: function Render(args, context) {
+        return <TextField {...args} control={context.control} />;
+    },
+};

@@ -3,15 +3,14 @@ import { Controller } from 'react-hook-form';
 import { useThemeProps } from '@mui/material/styles';
 import {
 	TextField as MonsteraUiTextField,
-	Action,
-} from './../../../../../components';
+} from 'components';
 import _ from 'lodash';
 
 import { ControlledTextFieldProps } from './TextField.types';
 
 export const TextField = ({
 	control,
-	defaultValue,
+	defaultValue = '',
 	disabled = false,
 	name,
 	onChange,
@@ -32,10 +31,11 @@ export const TextField = ({
 			disabled={disabled}
 			name={name}
 			rules={_.merge({ required: fieldProps.required }, rules)}
-			render={({ field, fieldState }) => {
+			render={({ field }) => {
+			// render={({ field, fieldState }) => {
 				return (
 					<MonsteraUiTextField
-						// data-qa={name}
+						data-qa={name}
 						disabled={disabled}
 						name={name as string}
 						{...props}
@@ -53,6 +53,7 @@ export const TextField = ({
 							}
 						}}
 						ref={field.ref}
+                        value={field.value ?? defaultValue ?? ''}
 					/>
 				);
 			}}
@@ -60,5 +61,3 @@ export const TextField = ({
 		/>
 	);
 };
-
-export { Action };

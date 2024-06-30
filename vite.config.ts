@@ -42,13 +42,31 @@ export default defineConfig({
 		},
 	},
     resolve: {
-        alias: {
-            lib: "/lib",
-            components: "/lib/components",
-            providers: "/lib/providers",
-            services: "/lib/services",
-            utilities: "/lib/utilities",
-            ux: "/lib/ux",
-        },
+        alias: [
+            {
+                find: "lib",
+                replacement: resolve(__dirname, "/lib")
+            },
+            {
+                find: "components",
+                replacement: resolve(__dirname, "/lib/components")
+            },
+            {
+                find: "providers",
+                replacement: resolve(__dirname, "/lib/providers")
+            },
+            {
+                find: "services",
+                replacement: resolve(__dirname, "/lib/services")
+            },
+            {
+                find: "utilities",
+                replacement: resolve(__dirname, "/lib/utilities")
+            },
+            {
+                find: "ux",
+                replacement: resolve(__dirname, "/lib/ux")
+            },
+        ],
     },
 });

@@ -4,12 +4,12 @@ import { styled, useThemeProps } from '@mui/material/styles';
 
 import { WidgetFooterProps, WidgetFooterOwnerState } from './Widget.types';
 
-const Root = styled('div', {
-	// TO MAKE IT A BOX
-	name: 'MuiWidgetBody',
+const Root = styled(Box, {
+	name: 'MuiWidgetFooter',
 })<{ ownerState: WidgetFooterOwnerState }>(
 	({ theme, ownerState: { color = 'default' } }) => ({
 		width: '100%',
+        minHeight: '48px',
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',

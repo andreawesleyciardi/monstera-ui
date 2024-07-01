@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import { styled, useThemeProps } from '@mui/material/styles';
 
 import { WidgetHeaderProps } from './Widget.types';
-import { WidgetTitle } from './WidgetTitle';
+import { WidgetTitle } from './WidgetTypography';
 
 const Root = styled(Box, {
 	name: 'MuiWidgetHeader',

@@ -1,4 +1,3 @@
-import React, { ElementType, ReactNode } from 'react';
 import { ButtonGroupProps } from '@mui/material/ButtonGroup';
 import { BoxProps } from '@mui/material/Box';
 import { PaperProps } from '@mui/material/Paper';
@@ -12,6 +11,10 @@ export type TThemeWidget = {
 };
 
 export interface WidgetProps extends PaperProps {}
+
+export interface WidgetOwnerState {
+    sx: SxProps
+}
 
 export interface WidgetHeaderProps extends Omit<BoxProps, 'title'> {
 	classes?: object;
@@ -69,5 +72,7 @@ export interface WidgetFooterProps extends BoxProps {
 		| 'default'
         | string;
 }
+
+export interface WidgetFooterTextProps extends TypographyProps {}
 
 export interface WidgetFooterOwnerState extends WidgetFooterProps {}

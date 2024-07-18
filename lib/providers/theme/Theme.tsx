@@ -12,6 +12,7 @@ import {
 	ThemeOptions as MuiThemeOptions,
 	ThemeProvider as MuiThemeProvider,
 } from '@mui/material/styles';
+import { deepmerge } from '@mui/utils';
 import { PaletteMode as MuiPaletteMode } from '@mui/material';
 import { ThemeContext as MuiThemeContext } from '@mui/styled-engine';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -22,25 +23,14 @@ import {
 	TTheme,
 	TModeDefinition,
 	TThemeContext,
-	TThemeProviderProps,
+
+    PaletteMode,
+	ThemeProviderProps,
 } from './Theme.types';
 import {
-	defaultBrand,
-	defaultPalette,
-	defaultExtraPalette,
-	defaultExtraDarkPalette,
-	defaultChartsPalette,
-	defaultChartsDarkPalette,
-	defaultComponents,
-	defaultTypography,
-} from './Theme.defaults';
-import {
-	createBrandedTheme,
-	createChartsPaletteTheme,
-	createPaletteTheme,
-	createComponentsTheme,
-	getCustomValue,
-} from './Theme.utilities';
+    getCustomTheme,
+    getDefaultTheme
+} from './Theme.styles';
 
 // Context
 
@@ -50,19 +40,9 @@ const ThemeContext = React.createContext<TThemeContext | null>(null);
 
 export const ThemeProvider: any = ({
 	children,
-	palette: customPalette = {},
-	brand: customBrand = {},
-	chartsPalette: customChartsPalette = [],
-	chartsDarkPalette: customChartsDarkPalette = [],
-	components: customComponents = {},
-	mode: customMode = 'light',
-	modeIsToggable = true,
-	darkPalette: customDarkPalette = {},
-	darkBrand: customDarkBrand = {},
-	darkComponents: customDarkComponents = {},
-	typography: customTypography = {},
-}: TThemeProviderProps) => {
-	const getDefaultMode = (mode: TModeDefinition): MuiPaletteMode => {
+    ...props
+}: ThemeProviderProps) => {
+	const getInitialMode = (mode: PaletteMode = 'light'): MuiPaletteMode => {
 		if (mode == 'auto') {
 			return useMediaQuery('(prefers-color-scheme: dark)')
 				? 'dark'
@@ -72,92 +52,26 @@ export const ThemeProvider: any = ({
 	};
 
 	const [mode, setMode] = useState<MuiPaletteMode>(
-		getDefaultMode(customMode)
+		getInitialMode(props.mode)
 	);
 
-	const themeBuilder = (
-		mode: MuiPaletteMode = 'light',
-		modeIsToggable: boolean
-	): MuiTheme => {
-		// Palette
-		const paletteTheme: MuiThemeOptions = createPaletteTheme(
-			getCustomValue(
-				customPalette,
-				customDarkPalette,
-				mode,
-				modeIsToggable
-			),
-			_.merge(
-				{},
-				defaultPalette,
-				mode == 'light' ? defaultExtraPalette : defaultExtraDarkPalette
-			),
-			mode
-		);
-		let customTheme: MuiTheme = createTheme(paletteTheme);
+    const themeMode = React.useMemo(
+        () => ({
+            togglePaletteMode: () => {
+                setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+            },
+        }),
+        [],
+    );
 
-		// Brand colors and assets
-		const brandedTheme: MuiThemeOptions = createBrandedTheme(
-			getCustomValue(customBrand, customDarkBrand, mode, modeIsToggable),
-			defaultBrand
-		);
-		customTheme = createTheme(customTheme as MuiThemeOptions, brandedTheme);
+    const theme = React.useMemo(
+        () =>
+            createTheme(deepmerge(getDefaultTheme(mode), getCustomTheme(props?.theme, mode))),
+        [mode, props?.theme],
+    );
 
-		// Charts colors
-		const chartsTheme: MuiThemeOptions = createChartsPaletteTheme(
-			getCustomValue(
-				customChartsPalette,
-				customChartsDarkPalette,
-				mode,
-				modeIsToggable,
-				true
-			),
-			getCustomValue(
-				defaultChartsPalette,
-				defaultChartsDarkPalette,
-				mode,
-				modeIsToggable,
-				true
-			)
-		);
-		customTheme = createTheme(customTheme as MuiThemeOptions, chartsTheme);
 
-		// Typography
-		const typographyTheme: MuiThemeOptions = {
-			typography: _.merge(
-				{},
-				defaultTypography(customTypography?.fontFamily),
-				customTypography
-			),
-		};
-		customTheme = createTheme(
-			customTheme as MuiThemeOptions,
-			typographyTheme
-		);
 
-		// Components
-		const componentsTheme: MuiThemeOptions = createComponentsTheme(
-			customTheme,
-			defaultComponents,
-			getCustomValue(
-				customComponents,
-				customDarkComponents,
-				mode,
-				modeIsToggable
-			)
-		);
-		customTheme = createTheme(
-			customTheme as MuiThemeOptions,
-			componentsTheme
-		);
-
-		console.log(customTheme);
-		return customTheme;
-	};
-
-	const theme = useMemo(() => themeBuilder(mode, modeIsToggable), [mode]);
-
-	// logo, logosRootUrl, [any]: any --> Create muiTheme custom variables https://mui.com/material-ui/customization/theming/#custom-variables
 
 	const toggleMode = useCallback(
 		() => setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light')),

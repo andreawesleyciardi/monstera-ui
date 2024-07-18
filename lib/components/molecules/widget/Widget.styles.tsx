@@ -15,18 +15,20 @@ export const WidgetTheme: TComponentsDefinition = {
 	},
 	MuiWidgetBody: {
 		defaultProps: {
-			color: 'default',
+			variant: 'default',
 			fullArea: false,
 			fullHeight: false,
 			fullWidth: false,
 		},
 	},
 	MuiWidgetHeader: {
-		defaultProps: {},
+		defaultProps: {
+            variant: 'default',
+        },
 	},
 	MuiWidgetFooter: {
 		defaultProps: {
-			color: 'default',
+			variant: 'default',
 		},
 	},
 	MuiWidgetTitle: {

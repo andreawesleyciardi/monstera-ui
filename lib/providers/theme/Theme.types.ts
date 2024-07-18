@@ -4,39 +4,123 @@ import { SvgIconProps } from '@mui/material/SvgIcon';
 import { PaletteMode as MuiPaletteMode } from '@mui/material';
 import React from 'react';
 
+
+
+import { PaletteColor, PaletteColorOptions } from '@mui/material/styles';
+
+declare module '@mui/material/styles' {
+	interface Palette {
+        borders: PaletteColor;
+        chart1: PaletteColor;
+        chart2: PaletteColor;
+        chart3: PaletteColor;
+        chart4: PaletteColor;
+        chart5: PaletteColor;
+        chart6: PaletteColor;
+        darker: PaletteColor;
+        even: PaletteColor;
+        odd: PaletteColor;
+        oppositeMode: PaletteColor; 
+	}
+
+	interface PaletteOptions {
+        borders?: PaletteColorOptions;
+        chart1?: PaletteColorOptions;
+        chart2?: PaletteColorOptions;
+        chart3?: PaletteColorOptions;
+        chart4?: PaletteColorOptions;
+        chart5?: PaletteColorOptions;
+        chart6?: PaletteColorOptions;
+        darker?: PaletteColorOptions;
+        even?: PaletteColorOptions;
+        odd?: PaletteColorOptions;
+        oppositeMode?: PaletteColorOptions;
+	}
+
+    interface Theme {
+        branding: {
+            appName: string;
+            companyName: string;
+            logo: string | { [key: string]: string };
+            logosRootUrl: string;
+            palette: PaletteOptions;
+            [key: string]: any;
+        };
+        icons: {
+            add: React.FunctionComponent<SvgIconProps>;
+            copy: React.FunctionComponent<SvgIconProps>;
+            delete: React.FunctionComponent<SvgIconProps>;
+            edit: React.FunctionComponent<SvgIconProps>;
+            export: React.FunctionComponent<SvgIconProps>;
+            filter: React.FunctionComponent<SvgIconProps>;
+            firstPage: React.FunctionComponent<SvgIconProps>;
+            info: React.FunctionComponent<SvgIconProps>;
+            lastPage: React.FunctionComponent<SvgIconProps>;
+            nextPage: React.FunctionComponent<SvgIconProps>;
+            previousPage: React.FunctionComponent<SvgIconProps>;
+            remove: React.FunctionComponent<SvgIconProps>;
+            search: React.FunctionComponent<SvgIconProps>;
+            sort: React.FunctionComponent<SvgIconProps>;
+            [key: string]: React.FunctionComponent<SvgIconProps> | null | undefined;
+        };
+    }
+    
+    interface ThemeOptions {
+        branding?: {
+            appName?: string;
+            companyName?: string;
+            logo?: string | { [key: string]: string };
+            logosRootUrl?: string;
+            [key: string]: any;
+        };
+        icons?: {
+            add?: React.FunctionComponent<SvgIconProps>;
+            copy?: React.FunctionComponent<SvgIconProps>;
+            delete?: React.FunctionComponent<SvgIconProps>;
+            edit?: React.FunctionComponent<SvgIconProps>;
+            export?: React.FunctionComponent<SvgIconProps>;
+            filter?: React.FunctionComponent<SvgIconProps>;
+            firstPage?: React.FunctionComponent<SvgIconProps>;
+            info?: React.FunctionComponent<SvgIconProps>;
+            lastPage?: React.FunctionComponent<SvgIconProps>;
+            nextPage?: React.FunctionComponent<SvgIconProps>;
+            previousPage?: React.FunctionComponent<SvgIconProps>;
+            remove?: React.FunctionComponent<SvgIconProps>;
+            search?: React.FunctionComponent<SvgIconProps>;
+            sort?: React.FunctionComponent<SvgIconProps>;
+            [key: string]: React.FunctionComponent<SvgIconProps> | null | undefined;
+        };
+    }
+
+    interface TypographyVariants {
+		label: React.CSSProperties;
+	}
+
+	interface TypographyVariantsOptions {
+		label?: React.CSSProperties;
+	}
+}
+
+declare module '@mui/material/Typography' {
+	interface TypographyPropsVariantOverrides {
+		label: true;
+	}
+}
+
+export type PaletteMode = MuiPaletteMode | 'auto';
+
+export type ThemeProviderProps = {
+    children: React.ReactNode;
+    mode: PaletteMode;
+	theme: MuiTheme;
+}
+
+
+
+
 export type TThemeContext = {};
 
-export type TColorsVariables = {
-	primary?: TColorDefinition;
-	secondary?: TColorDefinition;
-	error?: TColorDefinition;
-	warning?: TColorDefinition;
-	info?: TColorDefinition;
-	success?: TColorDefinition;
-} & {
-	[key: string]: TColorDefinition;
-};
 
-export type TColor = {
-	main: string;
-	light?: string;
-	dark?: string;
-	contrastText?: string;
-};
-
-export type TColorDefinition = string | TColor | undefined;
-
-// ----------------------------------------------------------------
-
-export type TPaletteDefinition = { contrastThreshold?: number } & {
-	[key: string]: TColorDefinition;
-};
-
-export type TPalette = { contrastThreshold?: number } & {
-	[key: string]: TColor;
-};
-
-// ----------------------------------------------------------------
 
 export type TBrandPalette = {
 	primary?: TColorDefinition;
@@ -113,7 +197,7 @@ export type TIconsDefinition = {
 
 // ----------------------------------------------------------------
 
-export type TModeDefinition = MuiPaletteMode | 'auto';
+
 
 // ----------------------------------------------------------------
 

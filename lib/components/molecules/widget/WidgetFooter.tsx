@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, } from 'react';
 import { Box } from '@mui/material';
 import { styled, useThemeProps } from '@mui/material/styles';
 
@@ -7,7 +7,7 @@ import { WidgetFooterProps, WidgetFooterOwnerState } from './Widget.types';
 const Root = styled(Box, {
 	name: 'MuiWidgetFooter',
 })<{ ownerState: WidgetFooterOwnerState }>(
-	({ theme, ownerState: { color = 'default' } }) => ({
+	({ theme, ownerState: { variant = 'default' } }) => ({
 		width: '100%',
         minHeight: '48px',
 		display: 'flex',
@@ -19,31 +19,32 @@ const Root = styled(Box, {
 		...theme.typography.body1,
 		...{
 			backgroundColor:
-				theme.palette[color != 'default' ? color : 'widget'].main,
+				theme.palette[variant != 'default' ? variant : 'widget'].main,
 		},
 	})
 );
 
-export const WidgetFooter = React.forwardRef<HTMLDivElement, WidgetFooterProps>(
-	function WidgetFooter(inProps, ref) {
-		const { children, ...props } = useThemeProps({
-			props: inProps,
-			name: 'MuiWidgetFooter',
-		});
+const WidgetFooter: ForwardRefExoticComponent<PropsWithoutRef<WidgetFooterProps> & RefAttributes<HTMLDivElement>> = forwardRef((inProps: WidgetFooterProps, ref) => {
+	const { children, ...props } = useThemeProps({
+		props: inProps,
+		name: 'MuiWidgetFooter',
+	});
 
-		const ownerState = {
-			...props,
-		};
+	const ownerState = {
+		...props,
+	};
 
-		return (
-			<Root
-				className={`MuiWidgetFooter`}
-				ownerState={ownerState}
-				role="widget-footer"
-				ref={ref}
-			>
-				{children}
-			</Root>
-		);
-	}
-);
+	return (
+		<Root
+			className={`MuiWidgetFooter`}
+			ownerState={ownerState}
+			role="widget-footer"
+            {...props}
+			ref={ref}
+		>
+			{children}
+		</Root>
+	);
+}) as ForwardRefExoticComponent<PropsWithoutRef<WidgetFooterProps> & RefAttributes<HTMLDivElement>>;
+
+export default WidgetFooter;

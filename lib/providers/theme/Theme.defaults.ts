@@ -31,6 +31,7 @@ declare module '@mui/material/styles' {
 		default: PaletteColor;
 		dialog: PaletteColor;
 		chartsColors: string[];
+        light: PaletteColor;
 		transparent: PaletteColor;
 		widget: PaletteColor;
 	}
@@ -40,6 +41,7 @@ declare module '@mui/material/styles' {
 		default: PaletteColor;
 		dialog: PaletteColor;
 		chartsColors: string[];
+        light: PaletteColor;
 		transparent: PaletteColor;
 		widget: PaletteColor;
 	}
@@ -69,6 +71,12 @@ export const defaultExtraPalette: TPaletteDefinition = {
 		contrastText: '#333333',
 	},
 	dialog: {
+		main: '#FFFFFF',
+		light: '#FFFFFF',
+		dark: '#333333',
+		contrastText: '#333333',
+	},
+    light: {
 		main: '#FFFFFF',
 		light: '#FFFFFF',
 		dark: '#333333',

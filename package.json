@@ -72,6 +72,7 @@
 		"lodash": "^4.17.21",
 		"material-react-table": "^2.13.0",
 		"react-chartjs-2": "^5.2.0",
+		"react-docgen-typescript": "^2.2.2",
 		"react-hook-form": "^7.52.0",
 		"styled-components": "^6.1.11"
 	},

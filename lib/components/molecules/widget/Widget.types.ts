@@ -1,20 +1,13 @@
 import { ButtonGroupProps } from '@mui/material/ButtonGroup';
 import { BoxProps } from '@mui/material/Box';
 import { PaperProps } from '@mui/material/Paper';
-import { SxProps } from '@mui/system';
-import { Theme } from '@mui/material/styles';
 import { TypographyProps } from '@mui/material/Typography';
-import { Variant } from '@mui/material/styles/createTypography';
 
 export type TThemeWidget = {
 	backgroundColor: string;
 };
 
 export interface WidgetProps extends PaperProps {}
-
-export interface WidgetOwnerState {
-    sx: SxProps
-}
 
 export interface WidgetHeaderProps extends Omit<BoxProps, 'title'> {
 	classes?: object;
@@ -40,7 +33,7 @@ export interface WidgetActionsProps extends ButtonGroupProps {
 
 export interface WidgetBodyProps extends BoxProps {
 	classes?: object;
-	color?:
+	variant?:
 		| 'primary'
 		| 'secondary'
 		| 'success'
@@ -61,7 +54,7 @@ export interface WidgetBodyOwnerState extends WidgetBodyProps {}
 
 export interface WidgetFooterProps extends BoxProps {
 	classes?: object;
-	color?:
+	variant?:
 		| 'primary'
 		| 'secondary'
 		| 'success'

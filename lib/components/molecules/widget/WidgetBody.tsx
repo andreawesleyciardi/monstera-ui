@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, } from 'react';
 import { Box } from '@mui/material';
 import { styled, useThemeProps } from '@mui/material/styles';
 
@@ -11,14 +11,16 @@ const Root = styled(Box, {
 	({
 		theme,
 		ownerState: {
-			color = 'default',
+			variant = 'default',
 			fullArea,
 			fullHeight,
 			fullWidth,
 			paddingX,
 			paddingY,
 		},
-	}) => ({
+	}) => { debugger;
+        console.log(theme);
+        return ({
 		width: '100%',
 		display: 'flex',
 		alignItems: 'center',
@@ -29,51 +31,52 @@ const Root = styled(Box, {
 		// ...theme.typography.body1,
 		...{
 			backgroundColor:
-				theme.palette[color != 'default' ? color : 'widget'].main,
-			color: theme.palette[color != 'default' ? color : 'widget']
+				theme.palette[variant != 'default' ? variant : 'widget'].main,
+			color: theme.palette[variant != 'default' ? variant : 'widget']
 				.contrastText,
 			padding: `${
 				paddingY ?? (fullArea || fullHeight ? '0px' : '2rem')
 			} ${paddingX ?? (fullArea || fullWidth ? '0px' : '1.5rem')}`,
 		},
 	})
+}
 );
 
-export const WidgetBody = React.forwardRef<HTMLDivElement, WidgetBodyProps>(
-	function WidgetBody(inProps, ref) {
-		const {
-			children,
-			color,
-			fullArea,
-			fullHeight,
-			fullWidth,
-			paddingX,
-			paddingY,
-			...props
-		} = useThemeProps({
-			props: inProps,
-			name: 'MuiWidgetBody',
-		});
+const WidgetBody: ForwardRefExoticComponent<PropsWithoutRef<WidgetBodyProps> & RefAttributes<HTMLDivElement>> = forwardRef((inProps: WidgetBodyProps, ref) => {
+	const {
+		children,
+		variant,
+		fullArea,
+		fullHeight,
+		fullWidth,
+		paddingX,
+		paddingY,
+		...props
+	} = useThemeProps({
+		props: inProps,
+		name: 'MuiWidgetBody',
+	});
 
-		const ownerState = {
-			color,
-			fullArea,
-			fullHeight,
-			fullWidth,
-			paddingX,
-			paddingY,
-		};
+	const ownerState = {
+		variant,
+		fullArea,
+		fullHeight,
+		fullWidth,
+		paddingX,
+		paddingY,
+	};
 
-		return (
-			<Root
-				className={`MuiWidgetBody`}
-				ownerState={ownerState}
-				role="widget-body"
-				ref={ref}
-				{...props}
-			>
-				{children}
-			</Root>
-		);
-	}
-);
+	return (
+		<Root
+			className={`MuiWidgetBody`}
+			ownerState={ownerState}
+			role="widget-body"
+			ref={ref}
+			{...props}
+		>
+			{children}
+		</Root>
+	);
+}) as ForwardRefExoticComponent<PropsWithoutRef<WidgetBodyProps> & RefAttributes<HTMLDivElement>>;
+
+export default WidgetBody;

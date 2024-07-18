@@ -1,6 +1,5 @@
-import React from 'react';
+import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, } from 'react';
 import { Box } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import { styled, useThemeProps } from '@mui/material/styles';
 
 import { WidgetHeaderProps } from './Widget.types';
@@ -30,26 +29,27 @@ const Root = styled(Box, {
 	})
 );
 
-export const WidgetHeader = React.forwardRef<HTMLDivElement, WidgetHeaderProps>(
-	function WidgetHeader(inProps, ref) {
-		const { children, title, titleProps, variant, ...props } =
-			useThemeProps({
-				props: inProps,
-				name: 'MuiWidgetHeader',
-			});
+const WidgetHeader: ForwardRefExoticComponent<PropsWithoutRef<WidgetHeaderProps> & RefAttributes<HTMLDivElement>> = forwardRef((inProps: WidgetHeaderProps, ref) => {
+	const { children, title, titleProps, variant, ...props } =
+		useThemeProps({
+			props: inProps,
+			name: 'MuiWidgetHeader',
+		});
 
-		const ownerState = { variant };
+	const ownerState = { variant };
 
-		return (
-			<Root
-				className="MuiWidgetHeader"
-				ownerState={ownerState}
-				role="widget-header"
-				ref={ref}
-			>
-				{title && <WidgetTitle {...titleProps}>{title}</WidgetTitle>}
-				{children}
-			</Root>
-		);
-	}
-);
+	return (
+		<Root
+			className="MuiWidgetHeader"
+			ownerState={ownerState}
+			role="widget-header"
+            {...props}
+			ref={ref}
+		>
+			{title && <WidgetTitle {...titleProps}>{title}</WidgetTitle>}
+			{children}
+		</Root>
+	);
+}) as ForwardRefExoticComponent<PropsWithoutRef<WidgetHeaderProps> & RefAttributes<HTMLDivElement>>;
+
+export default WidgetHeader;

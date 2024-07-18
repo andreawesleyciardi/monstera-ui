@@ -8,7 +8,7 @@ const Root = styled(ButtonGroup, {
 	name: 'MuiWidgetActions',
 	slot: 'root',
 })<{ ownerState: WidgetActionsProps }>(
-	({ theme, ownerState: { position } }) => ({
+	({ ownerState: { position } }) => ({
 		borderRadius: '0px',
 		maxHeight: '100%',
 		position: 'absolute',

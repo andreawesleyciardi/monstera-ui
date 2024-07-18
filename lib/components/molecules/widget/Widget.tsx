@@ -1,8 +1,8 @@
-import React from 'react';
+import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, } from 'react';
 import Paper from '@mui/material/Paper';
 import { styled, useThemeProps } from '@mui/material/styles';
 
-import { WidgetProps, WidgetOwnerState } from './Widget.types';
+import { WidgetProps } from './Widget.types';
 
 const Root = styled(Paper, {
 	name: 'MuiWidget',
@@ -18,19 +18,16 @@ const Root = styled(Paper, {
     width: '100%',
 }));
 
-export const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
-	function Widget(inProps, ref) {
-		const { children, sx, ...props } = useThemeProps({
-			props: inProps,
-			name: 'MuiWidget',
-		});
+const Widget: ForwardRefExoticComponent<PropsWithoutRef<WidgetProps> & RefAttributes<HTMLDivElement>> = forwardRef((inProps: WidgetProps, ref) => {
+	const { children, ...props } = useThemeProps({
+		props: inProps,
+		name: 'MuiWidget',
+	});
+	return (
+		<Root className="MuiWidget" role="widget-root" {...props} ref={ref}>
+			{children}
+		</Root>
+	);
+}) as ForwardRefExoticComponent<PropsWithoutRef<WidgetProps> & RefAttributes<HTMLDivElement>>;
 
-        const ownerState = { sx }
-
-		return (
-			<Root className="MuiWidget" role="widget-root" {...props} sx={sx} ref={ref}>
-				{children}
-			</Root>
-		);
-	}
-);
+export default Widget;

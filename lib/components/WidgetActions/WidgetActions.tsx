@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonGroup } from '@mui/material';
 import { styled, useThemeProps } from '@mui/material/styles';
 
-import { WidgetActionsProps } from './Widget.types';
+import { WidgetActionsProps } from './WidgetActions.d';
 
 const Root = styled(ButtonGroup, {
 	name: 'MuiWidgetActions',

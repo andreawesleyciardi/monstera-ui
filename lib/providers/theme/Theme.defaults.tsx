@@ -19,7 +19,12 @@ import {
 	// TabsTheme,
 	TypographyTheme,
 	WidgetTheme,
-} from './../../components';
+	WidgetHeaderTheme,
+	WidgetBodyTheme,
+	WidgetFooterTheme,
+	WidgetActionsTheme,
+    WidgetTypographyTheme,
+} from '../../components';
 
 import MontserratThin from './fonts/Montserrat/Montserrat-Thin.ttf';
 import MontserratThinItalic from './fonts/Montserrat/Montserrat-ThinItalic.ttf';
@@ -39,10 +44,6 @@ import MontserratExtraBold from './fonts/Montserrat/Montserrat-ExtraBold.ttf';
 import MontserratExtraBoldItalic from './fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf';
 import MontserratBlack from './fonts/Montserrat/Montserrat-Black.ttf';
 import MontserratBlackItalic from './fonts/Montserrat/Montserrat-BlackItalic.ttf';
-
-export const getCustomTheme = (theme: MuiThemeOptions | ((mode: MuiPaletteMode) => MuiThemeOptions) = {}, mode: MuiPaletteMode): MuiThemeOptions => (
-    typeof theme === 'function' ? theme(mode) : theme
-);
 
 export const getDefaultTheme = (mode: MuiPaletteMode): MuiThemeOptions => ({
     palette: {
@@ -143,6 +144,11 @@ export const getDefaultTheme = (mode: MuiPaletteMode): MuiThemeOptions => ({
         // ...TabsTheme,
         ...TypographyTheme,
         ...WidgetTheme,
+        ...WidgetHeaderTheme,
+        ...WidgetBodyTheme,
+        ...WidgetFooterTheme,
+        ...WidgetActionsTheme,
+        ...WidgetTypographyTheme,
         MuiPaper: {
             styleOverrides: {
                 elevation1: {

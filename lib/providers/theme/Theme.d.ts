@@ -1,12 +1,23 @@
-import { Theme as MuiTheme } from '@mui/material/styles';
-import { TypographyOptions } from '@mui/material/styles/createTypography';
+import React from 'react';
+import {
+    ComponentsOverrides as MuiComponentsOverrides,
+    ComponentsProps as MuiComponentsProps,
+    ComponentsPropsList as MuiComponentsPropsList,
+    ComponentsVariants as MuiComponentsVariants,
+    PaletteColor,
+    PaletteColorOptions,
+    Theme as MuiTheme,
+    ThemeOptions as MuiThemeOptions
+} from '@mui/material/styles';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 import { PaletteMode as MuiPaletteMode } from '@mui/material';
-import React from 'react';
 
-
-
-import { PaletteColor, PaletteColorOptions } from '@mui/material/styles';
+import { WidgetClassKey, WidgetProps } from '../../components/Widget';
+import { WidgetHeaderClassKey, WidgetHeaderProps } from '../../components/WidgetHeader';
+import { WidgetBodyClassKey, WidgetBodyProps } from '../../components/WidgetBody';
+import { WidgetFooterClassKey, WidgetFooterProps } from '../../components/WidgetFooter';
+import { WidgetActionsClassKey, WidgetActionsProps } from '../../components/WidgetActions';
+import { WidgetTitleClassKey, WidgetTitleProps, WidgetFooterTextClassKey, WidgetFooterTextProps } from '../../components/WidgetTypography';
 
 declare module '@mui/material/styles' {
 	interface Palette {
@@ -36,14 +47,13 @@ declare module '@mui/material/styles' {
         odd?: PaletteColorOptions;
         oppositeMode?: PaletteColorOptions;
 	}
-
+    
     interface Theme {
         branding: {
             appName: string;
             companyName: string;
             logo: string | { [key: string]: string };
             logosRootUrl: string;
-            palette: PaletteOptions;
             [key: string]: any;
         };
         icons: {
@@ -99,6 +109,64 @@ declare module '@mui/material/styles' {
 	interface TypographyVariantsOptions {
 		label?: React.CSSProperties;
 	}
+
+    interface ComponentsPropsList {
+        MuiWidget: WidgetProps;
+        MuiWidgetHeader: WidgetHeaderProps;
+        MuiWidgetBody: WidgetBodyProps;
+        MuiWidgetFooter: WidgetFooterProps;
+        MuiWidgetActions: WidgetActionsProps;
+        MuiWidgetTitle: WidgetTitleProps;
+        MuiWidgetFooterText: WidgetFooterTextProps;
+    }
+
+    interface Components<Theme = unknown> {
+        MuiWidget?: {
+            defaultProps?: MuiComponentsProps['MuiWidget'];
+            styleOverrides?: MuiComponentsOverrides<Theme>['MuiWidget'];
+            variants?: MuiComponentsVariants<Theme>['MuiWidget'];
+        };
+        MuiWidgetHeader?: {
+            defaultProps?: MuiComponentsProps['MuiWidgetHeader'];
+            styleOverrides?: MuiComponentsOverrides<Theme>['MuiWidgetHeader'];
+            variants?: MuiComponentsVariants<Theme>['MuiWidgetHeader'];
+        };
+        MuiWidgetBody?: {
+            defaultProps?: MuiComponentsProps['MuiWidgetBody'];
+            styleOverrides?: MuiComponentsOverrides<Theme>['MuiWidgetBody'];
+            variants?: MuiComponentsVariants<Theme>['MuiWidgetBody'];
+        };
+        MuiWidgetFooter?: {
+            defaultProps?: MuiComponentsProps['MuiWidgetFooter'];
+            styleOverrides?: MuiComponentsOverrides<Theme>['MuiWidgetFooter'];
+            variants?: MuiComponentsVariants<Theme>['MuiWidgetFooter'];
+        };
+        MuiWidgetActions?: {
+            defaultProps?: MuiComponentsProps['MuiWidgetActions'];
+            styleOverrides?: MuiComponentsOverrides<Theme>['MuiWidgetActions'];
+            variants?: MuiComponentsVariants<Theme>['MuiWidgetActions'];
+        };
+        MuiWidgetTitle?: {
+            defaultProps?: MuiComponentsProps['MuiWidgetTitle'];
+            styleOverrides?: MuiComponentsOverrides<Theme>['MuiWidgetTitle'];
+            variants?: MuiComponentsVariants<Theme>['MuiWidgetTitle'];
+        };
+        MuiWidgetFooterText?: {
+            defaultProps?: MuiComponentsProps['MuiWidgetFooterText'];
+            styleOverrides?: MuiComponentsOverrides<Theme>['MuiWidgetFooterText'];
+            variants?: MuiComponentsVariants<Theme>['MuiWidgetFooterText'];
+        };
+    }
+
+    interface ComponentNameToClassKey {
+        MuiWidget: WidgetClassKey;
+        MuiWidgetHeader: WidgetHeaderClassKey;
+        MuiWidgetBody: WidgetBodyClassKey;
+        MuiWidgetFooter: WidgetFooterClassKey;
+        MuiWidgetActions: WidgetActionsClassKey;
+        MuiWidgetTitle: WidgetTitleClassKey;
+        MuiWidgetFooterText: WidgetFooterTextClassKey;
+    }
 }
 
 declare module '@mui/material/Typography' {
@@ -109,128 +177,14 @@ declare module '@mui/material/Typography' {
 
 export type PaletteMode = MuiPaletteMode | 'auto';
 
+export type ThemeProviderThemeProps = MuiThemeOptions | ((mode: MuiPaletteMode) => MuiThemeOptions);
+
 export type ThemeProviderProps = {
     children: React.ReactNode;
     mode: PaletteMode;
-	theme: MuiTheme;
+	theme: ThemeProviderThemeProps;
 }
 
-
-
-
-export type TThemeContext = {};
-
-
-
-export type TBrandPalette = {
-	primary?: TColorDefinition;
-	secondary?: TColorDefinition;
-} & {
-	[key: string]: TColorDefinition;
+export type ThemeContextProps = {
+    togglePaletteMode: () => void;
 };
-
-export type TBrandParams = {
-	logo?: string | { [key: string]: string };
-	logosRootUrl?: string;
-	[key: string]: any;
-};
-
-export type TBrandDefinition = {
-	palette?: TBrandPalette;
-} & TBrandParams;
-
-export type TBrand = {
-	palette?: TPalette;
-	brand?: TBrandParams;
-};
-
-export type TChartsPaletteDefinition = string[];
-
-// ----------------------------------------------------------------
-
-export type TComponents = {
-	[key: string]: {
-		defaultProps: {
-			[key: string]: string | boolean;
-		};
-		styleOverrides: {
-			[key: string]: (props: any) => void | object;
-		};
-	};
-};
-
-export type TStyleOverrides = {
-	[key: string]: any;
-};
-
-export type TComponentDefinition = {
-	defaultProps?: {
-		[key: string]: string | boolean | object | number;
-	};
-	styleOverrides?: string | TStyleOverrides;
-	variants?: object[];
-};
-
-export type TComponentsDefinition = {
-	[key: string]: TComponentDefinition;
-};
-
-// ----------------------------------------------------------------
-
-export type TIconsDefinition = {
-	add?: React.FunctionComponent<SvgIconProps>;
-	copy?: React.FunctionComponent<SvgIconProps>;
-	delete?: React.FunctionComponent<SvgIconProps>;
-	edit?: React.FunctionComponent<SvgIconProps>;
-	export?: React.FunctionComponent<SvgIconProps>;
-	filter?: React.FunctionComponent<SvgIconProps>;
-	firstPage?: React.FunctionComponent<SvgIconProps>;
-	info?: React.FunctionComponent<SvgIconProps>;
-	lastPage?: React.FunctionComponent<SvgIconProps>;
-	nextPage?: React.FunctionComponent<SvgIconProps>;
-	previousPage?: React.FunctionComponent<SvgIconProps>;
-	remove?: React.FunctionComponent<SvgIconProps>;
-	search?: React.FunctionComponent<SvgIconProps>;
-	sort?: React.FunctionComponent<SvgIconProps>;
-	[key: string]: React.FunctionComponent<SvgIconProps> | null | undefined;
-};
-
-// ----------------------------------------------------------------
-
-
-
-// ----------------------------------------------------------------
-
-export type TThemeProviderProps = {
-	children: React.ReactNode;
-	palette?: TPaletteDefinition;
-	brand?: TBrandDefinition;
-	chartsPalette?: TChartsPaletteDefinition;
-	chartsDarkPalette?: TChartsPaletteDefinition;
-	components?: TComponentsDefinition;
-	mode?: TModeDefinition;
-	modeIsToggable?: boolean;
-	darkPalette?: TPaletteDefinition;
-	darkBrand?: TBrandDefinition;
-	darkComponents?: TComponentsDefinition;
-	typography?: TypographyOptions;
-};
-
-export type TTheme = MuiTheme & {
-	mode?: MuiPaletteMode;
-	modeIsToggable?: boolean;
-	brand?: TBrandParams;
-	toggleMode?: () => void;
-};
-
-// export type TMuiCreateThemeProps = {
-// 	brand?: { [key: string]: string | number };
-// 	palette?: TPalette;
-// 	components?: any;
-// };
-
-// export type TTheme = {
-// 	palette?: TPalette;
-// 	components?: any;
-// 	[key: string]: any;
-// };

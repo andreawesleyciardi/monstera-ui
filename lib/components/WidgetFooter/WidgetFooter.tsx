@@ -2,7 +2,7 @@ import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, 
 import { Box } from '@mui/material';
 import { styled, useThemeProps } from '@mui/material/styles';
 
-import { WidgetFooterProps, WidgetFooterOwnerState } from './Widget.types';
+import { WidgetFooterProps, WidgetFooterOwnerState } from './WidgetFooter.d';
 
 const Root = styled(Box, {
 	name: 'MuiWidgetFooter',

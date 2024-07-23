@@ -26,7 +26,7 @@ import {
 import { CssBaselineTheme } from './Theme.fonts';
 
 declare module '@mui/material/styles' {
-	interface Palette {
+	interface PaletteX {
 		dark: PaletteColor;
 		default: PaletteColor;
 		dialog: PaletteColor;
@@ -35,7 +35,7 @@ declare module '@mui/material/styles' {
 		widget: PaletteColor;
 	}
 
-	interface PaletteOptions {
+	interface PaletteOptionsX {
 		dark: PaletteColor;
 		default: PaletteColor;
 		dialog: PaletteColor;

@@ -1,14 +1,10 @@
 import React, {
-	useCallback,
 	useContext,
-	useEffect,
-	useMemo,
 	useState,
 } from 'react';
 import _ from 'lodash';
 import {
 	createTheme,
-	Theme as MuiTheme,
 	ThemeOptions as MuiThemeOptions,
 	ThemeProvider as MuiThemeProvider,
 } from '@mui/material/styles';
@@ -20,21 +16,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
 import {
-	TTheme,
-	TModeDefinition,
-	TThemeContext,
-
     PaletteMode,
+    ThemeContextProps,
 	ThemeProviderProps,
-} from './Theme.types';
+    ThemeProviderThemeProps,
+} from './Theme.d';
 import {
-    getCustomTheme,
     getDefaultTheme
-} from './Theme.styles';
+} from './Theme.defaults';
 
 // Context
 
-const ThemeContext = React.createContext<TThemeContext | null>(null);
+const ThemeContext = React.createContext<ThemeContextProps | null>(null);
 
 // Provider
 
@@ -52,10 +45,19 @@ export const ThemeProvider: any = ({
 	};
 
 	const [mode, setMode] = useState<MuiPaletteMode>(
-		getInitialMode(props.mode)
+		() => { return getInitialMode(props.mode); }
 	);
 
-    const themeMode = React.useMemo(
+    const formatCustomTheme = (theme: ThemeProviderThemeProps = {}, mode: MuiPaletteMode): MuiThemeOptions => (
+        typeof theme === 'function' ? theme(mode) : theme
+    );
+
+    const theme = React.useMemo(
+        () => createTheme(deepmerge(getDefaultTheme(mode), formatCustomTheme(props?.theme, mode))),
+        [mode, props?.theme],
+    );
+
+    const contextValue = React.useMemo(
         () => ({
             togglePaletteMode: () => {
                 setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
@@ -63,30 +65,6 @@ export const ThemeProvider: any = ({
         }),
         [],
     );
-
-    const theme = React.useMemo(
-        () =>
-            createTheme(deepmerge(getDefaultTheme(mode), getCustomTheme(props?.theme, mode))),
-        [mode, props?.theme],
-    );
-
-
-
-
-	const toggleMode = useCallback(
-		() => setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light')),
-		[]
-	);
-
-	const contextValue = _.merge(
-		{},
-		{ mode: mode, modeIsToggable: modeIsToggable },
-		modeIsToggable
-			? {
-					toggleMode: toggleMode,
-			  }
-			: {}
-	);
 
 	return (
 		theme != null && (
@@ -104,8 +82,8 @@ export const ThemeProvider: any = ({
 	);
 };
 
-export const useTheme = (): TTheme => {
+export const useTheme = (): object => {
 	const themeContext = useContext(ThemeContext);
 	const muiThemeContext = useContext(MuiThemeContext);
-	return _.merge({}, themeContext, muiThemeContext) as TTheme;
+	return _.merge({}, themeContext, muiThemeContext) as object;
 };

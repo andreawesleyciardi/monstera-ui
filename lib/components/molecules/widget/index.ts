@@ -1,4 +1,5 @@
 export * from './Widget';
+export * from './WidgetX';
 export * from './WidgetActions';
 export * from './WidgetBody';
 export * from './WidgetFooter';

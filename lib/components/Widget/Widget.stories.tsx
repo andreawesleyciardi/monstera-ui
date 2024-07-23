@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Widget from './Widget';
-import WidgetHeader from './WidgetHeader';
-import WidgetBody from './WidgetBody';
-import WidgetFooter from './WidgetFooter';
-import { WidgetFooterText } from './WidgetTypography';
+import WidgetHeader from './../WidgetHeader';
+import WidgetBody from './../WidgetBody';
+import WidgetFooter from './../WidgetFooter';
+import { WidgetFooterText } from './../WidgetTypography';
 
 const meta = {
 	title: 'Components/Molecules/Widget',

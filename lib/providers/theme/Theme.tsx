@@ -16,7 +16,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
 import {
-    PaletteMode,
     ThemeContextProps,
 	ThemeProviderProps,
 } from './Theme.d';

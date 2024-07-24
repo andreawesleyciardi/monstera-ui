@@ -106,6 +106,10 @@ declare module '@mui/material/styles' {
         };
     }
 
+    interface TypeBackground {
+        base: string;
+    }
+
     interface TypographyVariants {
 		label: React.CSSProperties;
 	}

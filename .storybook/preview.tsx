@@ -1,5 +1,6 @@
 import React from 'react';
 import { Preview } from '@storybook/react';
+import _ from 'lodash';
 
 import { ThemeProvider, useTheme, useMuiTheme } from './../lib/providers';
 import { Stack } from './../lib/components';
@@ -16,15 +17,26 @@ const preview: Preview = {
                         <span>
                             <Stack spacing={2} direction="row">
                                 <button onClick={theme.togglePaletteMode}>Toggle Mode</button>
-                                <button onClick={theme.toggleIsBranded}>Toggle Is Branded</button>
+                                <button onClick={theme.toggleIsBranded}>Toggle Brand</button>
                             </Stack>
                         </span>
                     </Stack>
                 );
             };
 
+            const branding = {
+                palette: {
+                    primary: { main: '#C38A5F', contrastText: '#FFFFFF' },
+                    secondary: { main: '#7A7A9D', contrastText: '#FFFFFF' },
+                    error: { main: '#9B2757', contrastText: '#FFFFFF' },
+                    warnings: { main: '#FF7300', contrastText: '#FFFFFF' },
+                    info: { main: '#D8C193', contrastText: '#FFFFFF' },
+                    success: { main: '#96D5D0', contrastText: '#FFFFFF' },
+                }
+            };
+
             return (
-                <ThemeProvider {...(context.args?.theme != null ? context.args : {})}>
+                <ThemeProvider {...(context.args?.theme != null ? _.merge({}, context.args, { theme: { branding: branding }}, (context.args?.theme?.branding ?? {})) : {})}>
                     <Content>
                         <Story />
                     </Content>

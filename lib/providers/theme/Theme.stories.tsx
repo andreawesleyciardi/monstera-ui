@@ -1,11 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import ThemeProvider, { useTheme } from './Theme';
+import ThemeProvider from './Theme';
 import { Chip } from './../../components';
 
 const meta: Meta<typeof ThemeProvider> = {
 	title: 'Providers/Theme',
 	component: ThemeProvider,
+    args: {
+        theme: {}
+    }
 };
 
 export default meta;
@@ -13,47 +16,38 @@ export default meta;
 type Story = StoryObj<typeof ThemeProvider>;
 
 export const Base: Story = {
-    args: {
-        theme: {}
-    },
-    render: (args) => (
-        <ThemeProvider>
-            <Chip label="Teeeeest" onDelete={(e) => { alert('closing'); }} color="primary" />
-        </ThemeProvider>
+    render: () => (
+        <Chip label="Teeeeest" onDelete={() => { alert('closing'); }} color="primary" />
     ),
 };
 
 export const Dark: Story = {
     args: {
         mode: 'dark',
-        theme: {}
     },
-    render: (args) => (
-        <Chip label="Teeeeest" onDelete={(e) => { alert('closing'); }} color="primary" />
+    render: () => (
+        <Chip label="Teeeeest" onDelete={() => { alert('closing'); }} color="primary" />
     ),
 };
 
 export const Branded: Story = {
     args: {
         isBranded: true,
-        theme: {
-            branding: {
-                palette: {
-                    primary: { main: '#C38A5F', contrastText: '#FFFFFF' },
-                    secondary: { main: '#7A7A9D', contrastText: '#FFFFFF' },
-                    error: { main: '#9B2757', contrastText: '#FFFFFF' },
-                    warnings: { main: '#FF7300', contrastText: '#FFFFFF' },
-                    info: { main: '#D8C193', contrastText: '#FFFFFF' },
-                    success: { main: '#96D5D0', contrastText: '#FFFFFF' },
-                }
-            }
-        }
     },
-    render: (args) => (
-        <Chip label="Teeeeest" onDelete={(e) => { alert('closing'); }} color="primary" />
+    render: () => (
+        <Chip label="Teeeeest" onDelete={() => { alert('closing'); }} color="primary" />
     ),
 };
 
+export const DarkBranded: Story = {
+    args: {
+        isBranded: true,
+        mode: 'dark',
+    },
+    render: () => (
+        <Chip label="Teeeeest" onDelete={() => { alert('closing'); }} color="primary" />
+    ),
+};
 
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { styled, useThemeProps } from '@mui/material/styles';
 import { Chip as MuiChip } from '@mui/material';
 
-import { ChipProps, ChipOwnProps } from './Chip.types';
+import { ChipProps, ChipOwnProps } from './Chip.d';
 
 declare module '@mui/material/Chip' {
     interface ChipPropsOverrides {

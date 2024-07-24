@@ -17,7 +17,7 @@ const Root = styled(ButtonGroup, {
 	})
 );
 
-export const WidgetActions = React.forwardRef<
+const WidgetActions = React.forwardRef<
 	HTMLDivElement,
 	WidgetActionsProps
 >(function WidgetActions(inProps, ref) {
@@ -40,3 +40,5 @@ export const WidgetActions = React.forwardRef<
 		</Root>
 	);
 });
+
+export default WidgetActions;

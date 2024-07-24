@@ -19,11 +19,10 @@ import {
     PaletteMode,
     ThemeContextProps,
 	ThemeProviderProps,
-    ThemeProviderThemeProps,
 } from './Theme.d';
 import {
     getDefaultTheme
-} from './Theme.defaults';
+} from './Theme.theme';
 
 // Context
 
@@ -31,36 +30,36 @@ const ThemeContext = React.createContext<ThemeContextProps | null>(null);
 
 // Provider
 
-export const ThemeProvider: any = ({
+const ThemeProvider: any = ({
 	children,
     ...props
 }: ThemeProviderProps) => {
-	const getInitialMode = (mode: PaletteMode = 'light'): MuiPaletteMode => {
-		if (mode == 'auto') {
-			return useMediaQuery('(prefers-color-scheme: dark)')
-				? 'dark'
-				: 'light';
-		}
-		return mode;
-	};
+	const [mode, setMode] = useState<MuiPaletteMode>(props.mode == 'auto' ? (useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light') : (props.mode ?? 'light'));
 
-	const [mode, setMode] = useState<MuiPaletteMode>(
-		() => { return getInitialMode(props.mode); }
-	);
-
-    const formatCustomTheme = (theme: ThemeProviderThemeProps = {}, mode: MuiPaletteMode): MuiThemeOptions => (
-        typeof theme === 'function' ? theme(mode) : theme
-    );
+	const [isBranded, setIsBranded] = useState<boolean>(props.isBranded ?? false);
 
     const theme = React.useMemo(
-        () => createTheme(deepmerge(getDefaultTheme(mode), formatCustomTheme(props?.theme, mode))),
-        [mode, props?.theme],
+        () => {
+            const customTheme = props?.theme != null ? (typeof props?.theme === 'function' ? props?.theme(mode) : props?.theme) : {};
+            return createTheme(
+            deepmerge(
+                _.merge(
+                    getDefaultTheme(mode),
+                    { palette: (isBranded === true && customTheme?.branding?.palette != null ? customTheme?.branding?.palette : {}) }
+                ),
+                customTheme
+            )
+        )},
+        [mode, isBranded, props?.theme],
     );
 
     const contextValue = React.useMemo(
         () => ({
             togglePaletteMode: () => {
                 setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+            },
+            toggleIsBranded: () => {
+                setIsBranded((prevMode) => (prevMode === true ? false : true));
             },
         }),
         [],
@@ -82,8 +81,15 @@ export const ThemeProvider: any = ({
 	);
 };
 
-export const useTheme = (): object => {
+const useTheme = (): ThemeContextProps => {
 	const themeContext = useContext(ThemeContext);
-	const muiThemeContext = useContext(MuiThemeContext);
-	return _.merge({}, themeContext, muiThemeContext) as object;
+	return themeContext;
 };
+
+const useMuiTheme = (): MuiThemeOptions => {
+	const muiThemeContext = useContext(MuiThemeContext);
+	return muiThemeContext;
+};
+
+export default ThemeProvider;
+export { useTheme, useMuiTheme };

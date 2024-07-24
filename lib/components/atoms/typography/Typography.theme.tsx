@@ -1,6 +1,6 @@
-import { TComponentsDefinition } from '../../../providers';
+import { Components } from '@mui/material/styles';
 
-export const TypographyTheme: TComponentsDefinition = {
+export const TypographyTheme: Components = {
 	MuiTypography: {
 		defaultProps: {
 			sx: {

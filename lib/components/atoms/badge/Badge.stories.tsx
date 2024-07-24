@@ -4,8 +4,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import { Badge } from './Badge';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-const meta = {
-	title: 'Components/Atoms/Badge',
+const meta: Meta<typeof Badge> = {
+	title: 'Components/Badge',
 	component: Badge,
 	parameters: {
 		
@@ -25,10 +25,11 @@ const meta = {
         color: 'primary',
         badgeContent: 6
 	},
-} satisfies Meta<typeof Badge>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof Badge>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Basic: Story = {

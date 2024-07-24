@@ -1,6 +1,6 @@
 export { default } from './WidgetBody';
 export * from './WidgetBody.d';
-export * from './WidgetBody.defaults';
+export * from './WidgetBody.theme';
 
-export { default as widgetBodyClasses } from './widgetBodyClasses';
-export * from './widgetBodyClasses';
+// export { default as widgetBodyClasses } from './widgetBodyClasses.d';
+export * from './widgetBodyClasses.d';

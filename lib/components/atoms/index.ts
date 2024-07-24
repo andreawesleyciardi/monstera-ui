@@ -12,7 +12,7 @@ export * from './inputs';
 // export * from './light';
 // export * from './permissions';
 // export * from './score';
-// export * from './stack';
+export * from './stack';
 // export * from './status';
 // export * from './table';
 // export * from './tabs';

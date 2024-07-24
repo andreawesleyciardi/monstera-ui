@@ -3,6 +3,6 @@ export interface WidgetActionsClasses {
     root: string;
 }
 export type WidgetActionsClassKey = keyof WidgetActionsClasses;
-// export declare function getWidgetUtilityActionsClass(slot: string): string;
-declare const widgetActionsClasses: WidgetActionsClasses;
-export default widgetActionsClasses;
+export declare function getWidgetActionsUtilityClass(slot: string): string;
+// declare const widgetActionsClasses: WidgetActionsClasses;
+// export default widgetActionsClasses;

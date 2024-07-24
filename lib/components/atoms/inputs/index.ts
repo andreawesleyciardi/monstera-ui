@@ -1,3 +1,3 @@
 export * from './textfield';
 // export * from './recipients';
-export * from './Inputs.styles';
+export * from './Inputs.theme';

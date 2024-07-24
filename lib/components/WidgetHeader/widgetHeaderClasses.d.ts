@@ -3,6 +3,6 @@ export interface WidgetHeaderClasses {
     root: string;
 }
 export type WidgetHeaderClassKey = keyof WidgetHeaderClasses;
-// export declare function getWidgetHeaderUtilityClass(slot: string): string;
-declare const widgetHeaderClasses: WidgetHeaderClasses;
-export default widgetHeaderClasses;
+export declare function getWidgetHeaderUtilityClass(slot: string): string;
+// declare const widgetHeaderClasses: WidgetHeaderClasses;
+// export default widgetHeaderClasses;

@@ -1,6 +1,6 @@
-import { TComponentsDefinition } from './../../../providers';
+import { Components } from '@mui/material/styles';
 
-export const InputsTheme: TComponentsDefinition = {
+export const InputsTheme: Components = {
 	MuiFormLabel: {
 		styleOverrides: {
 			root: {

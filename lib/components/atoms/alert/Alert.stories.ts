@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Alert } from './Alert';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-const meta = {
-	title: 'Components/Atoms/Alert',
+const meta: Meta<typeof Alert> = {
+	title: 'Components/Alert',
 	component: Alert,
 	parameters: {
 		
@@ -14,10 +14,11 @@ const meta = {
 		children: { control: 'text' },
 		severity: { control: 'text' },
 	},
-} satisfies Meta<typeof Alert>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof Alert>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Success: Story = {

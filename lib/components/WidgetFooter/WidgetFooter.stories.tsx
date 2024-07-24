@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Widget from './Widget';
-import WidgetHeader from './WidgetHeader';
-import WidgetBody from './WidgetBody';
-import WidgetFooter from './WidgetFooter';
-import { WidgetFooterText } from './WidgetTypography';
+import Widget from './../Widget';
+import WidgetHeader from './../WidgetHeader';
+import WidgetBody from './../WidgetBody';
+import WidgetFooter from './../WidgetFooter';
+import { WidgetFooterText } from './../WidgetTypography';
 
-const meta = {
-	title: 'Components/Molecules/Widget/Footer',
+const meta: Meta<typeof WidgetFooter> = {
+	title: 'Components/WidgetFooter',
 	component: WidgetFooter,
     decorators: [
         (Story) => (
@@ -20,10 +20,11 @@ const meta = {
             </div>
         ),
     ],
-} satisfies Meta<typeof WidgetFooter>;
+} ;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof WidgetFooter>;
 
 export const Base: Story = {
     args: {

@@ -1,16 +1,36 @@
 import React from 'react';
 import { Preview } from '@storybook/react';
 
-import { ThemeProvider } from '../lib/providers';
+import { ThemeProvider, useTheme, useMuiTheme } from './../lib/providers';
+import { Stack } from './../lib/components';
 
 const preview: Preview = {  
     decorators: [
-        (Story) => (
-            <ThemeProvider>
-                {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-                <Story />
-            </ThemeProvider>
-        ),
+        (Story, context) => {
+            const Content = ({children, ...props}) => {
+                const theme = useTheme();
+                const muiTheme = useMuiTheme();
+                return (
+                    <Stack spacing={2} sx={{ minWidth: '800px', padding: '2rem 5rem', backgroundColor: muiTheme?.palette?.background?.base }}>
+                        <span>{children}</span>
+                        <span>
+                            <Stack spacing={2} direction="row">
+                                <button onClick={theme.togglePaletteMode}>Toggle Mode</button>
+                                <button onClick={theme.toggleIsBranded}>Toggle Is Branded</button>
+                            </Stack>
+                        </span>
+                    </Stack>
+                );
+            };
+
+            return (
+                <ThemeProvider {...(context.args?.theme != null ? context.args : {})}>
+                    <Content>
+                        <Story />
+                    </Content>
+                </ThemeProvider>
+            )
+        },
     ],   
 	parameters: {
         // actions: { argTypesRegex: '^on[A-Z].*' },

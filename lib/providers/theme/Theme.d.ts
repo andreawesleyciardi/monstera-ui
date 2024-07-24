@@ -7,10 +7,10 @@ import {
     PaletteColor,
     PaletteColorOptions,
     Theme as MuiTheme,
-    ThemeOptions as MuiThemeOptions
+    ThemeOptions as MuiThemeOptions,
 } from '@mui/material/styles';
 import { SvgIconProps } from '@mui/material/SvgIcon';
-import { PaletteMode as MuiPaletteMode } from '@mui/material';
+import { PaletteMode as MuiPaletteMode, PaletteOptions as MuiPaletteOptions } from '@mui/material';
 
 import { WidgetClassKey, WidgetProps } from '../../components/Widget';
 import { WidgetHeaderClassKey, WidgetHeaderProps } from '../../components/WidgetHeader';
@@ -21,6 +21,7 @@ import { WidgetTitleClassKey, WidgetTitleProps, WidgetFooterTextClassKey, Widget
 
 declare module '@mui/material/styles' {
 	interface Palette {
+        baseMode: PaletteColor;
         borders: PaletteColor;
         chart1: PaletteColor;
         chart2: PaletteColor;
@@ -35,6 +36,7 @@ declare module '@mui/material/styles' {
 	}
 
 	interface PaletteOptions {
+        baseMode?: PaletteColorOptions;
         borders?: PaletteColorOptions;
         chart1?: PaletteColorOptions;
         chart2?: PaletteColorOptions;
@@ -54,6 +56,7 @@ declare module '@mui/material/styles' {
             companyName: string;
             logo: string | { [key: string]: string };
             logosRootUrl: string;
+            palette: Palette;
             [key: string]: any;
         };
         icons: {
@@ -81,6 +84,7 @@ declare module '@mui/material/styles' {
             companyName?: string;
             logo?: string | { [key: string]: string };
             logosRootUrl?: string;
+            palette?: PaletteOptions;
             [key: string]: any;
         };
         icons?: {
@@ -177,14 +181,45 @@ declare module '@mui/material/Typography' {
 
 export type PaletteMode = MuiPaletteMode | 'auto';
 
+// export type ThemeProviderThemeOptions = MuiThemeOptions & {
+//     branding?: {
+//         appName?: string;
+//         companyName?: string;
+//         logo?: string | { [key: string]: string };
+//         logosRootUrl?: string;
+//         palette?: MuiPaletteOptions;
+//         [key: string]: any;
+//     };
+//     icons?: {
+//         add?: React.FunctionComponent<SvgIconProps>;
+//         copy?: React.FunctionComponent<SvgIconProps>;
+//         delete?: React.FunctionComponent<SvgIconProps>;
+//         edit?: React.FunctionComponent<SvgIconProps>;
+//         export?: React.FunctionComponent<SvgIconProps>;
+//         filter?: React.FunctionComponent<SvgIconProps>;
+//         firstPage?: React.FunctionComponent<SvgIconProps>;
+//         info?: React.FunctionComponent<SvgIconProps>;
+//         lastPage?: React.FunctionComponent<SvgIconProps>;
+//         nextPage?: React.FunctionComponent<SvgIconProps>;
+//         previousPage?: React.FunctionComponent<SvgIconProps>;
+//         remove?: React.FunctionComponent<SvgIconProps>;
+//         search?: React.FunctionComponent<SvgIconProps>;
+//         sort?: React.FunctionComponent<SvgIconProps>;
+//         [key: string]: React.FunctionComponent<SvgIconProps> | null | undefined;
+//     };
+// }
+
+// export type ThemeProviderThemeProps = ThemeProviderThemeOptions | ((mode: MuiPaletteMode) => ThemeProviderThemeOptions);
 export type ThemeProviderThemeProps = MuiThemeOptions | ((mode: MuiPaletteMode) => MuiThemeOptions);
 
 export type ThemeProviderProps = {
     children: React.ReactNode;
+    isBranded: boolean;
     mode: PaletteMode;
 	theme: ThemeProviderThemeProps;
 }
 
 export type ThemeContextProps = {
     togglePaletteMode: () => void;
+    toggleIsBranded: () => void;
 };

@@ -1,34 +1,33 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Widget from './Widget';
-import WidgetHeader from './WidgetHeader';
+import Widget from './../Widget';
+import WidgetHeader from './../WidgetHeader';
 import WidgetBody from './WidgetBody';
-import WidgetFooter from './WidgetFooter';
-import { WidgetFooterText } from './WidgetTypography';
+import WidgetFooter from './../WidgetFooter';
+import { WidgetFooterText } from './../WidgetTypography';
 
-const meta = {
-	title: 'Components/Molecules/Widget/Body',
+const meta: Meta<typeof WidgetBody> = {
+	title: 'Components/WidgetBody',
 	component: WidgetBody,
     decorators: [
         (Story) => (
-            <div style={{ width: '800px', padding: '2rem 5rem', backgroundColor: '#F3F3F5' }}>
-                <Widget>
-                    <WidgetHeader title="Widget Title" sx={{ backgroundColor: '#DADADA', color: '#919191' }} />
-                    <Story />
-                    <WidgetFooter sx={{backgroundColor: '#DADADA', color: '#919191' }}>
-                        <WidgetFooterText>Widget Footer Content</WidgetFooterText>
-                    </WidgetFooter>
-                </Widget>
-            </div>
+            <Widget>
+                <WidgetHeader title="Widget Title" sx={{ backgroundColor: '#DADADA', color: '#919191' }} />
+                <Story />
+                <WidgetFooter sx={{backgroundColor: '#DADADA', color: '#919191' }}>
+                    <WidgetFooterText>Widget Footer Content</WidgetFooterText>
+                </WidgetFooter>
+            </Widget>
         ),
     ],
-} satisfies Meta<typeof WidgetBody>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof WidgetBody>;
 
 export const Base: Story = {
     args: {
-        children: <>Widget Body Content</>
+        children: <>Widget Body Content</>,
     }
 };

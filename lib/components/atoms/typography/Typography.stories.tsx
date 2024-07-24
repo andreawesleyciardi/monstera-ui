@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Typography } from './Typography';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-const meta = {
-	title: 'Components/Atoms/Typography',
+const meta: Meta<typeof Typography> = {
+	title: 'Components/Typography',
 	component: Typography,
 	parameters: {
 		
@@ -17,10 +17,11 @@ const meta = {
         paragraph: { control: 'boolean', defaultValue: false, table: {defaultValue: {summary: 'false'}} },
 		variant: { control: 'select', options: ['body1', 'body2', 'button', 'caption', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'inherit', 'overline', 'subtitle1', 'subtitle2'], defaultValue: 'body1', table: {defaultValue: {summary: 'body1'}} },
 	},
-} satisfies Meta<typeof Typography>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof Typography>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Base: Story = {

@@ -24,7 +24,7 @@ import {
 	WidgetFooterTheme,
 	WidgetActionsTheme,
     WidgetTypographyTheme,
-} from '../../components';
+} from './../../components';
 
 import MontserratThin from './fonts/Montserrat/Montserrat-Thin.ttf';
 import MontserratThinItalic from './fonts/Montserrat/Montserrat-ThinItalic.ttf';
@@ -63,6 +63,10 @@ export const getDefaultTheme = (mode: MuiPaletteMode): MuiThemeOptions => ({
         darker: { main: '#242A30', contrastText: '#FFFFFF' },
         ...(mode === 'light' ?
             {
+                background: {
+                    base: '#F3F3F5'
+                },
+                baseMode: { main: '#FFFFFF', contrastText: '#333333' },
                 borders: { main: '#E5E6E7', contrastText: '#333333' },
                 even: { main: '#F9F9F9', contrastText: '#333333' },
                 odd: { main: '#FFFFFF', contrastText: '#333333' },
@@ -70,6 +74,10 @@ export const getDefaultTheme = (mode: MuiPaletteMode): MuiThemeOptions => ({
             }
             :
             {
+                background: {
+                    base: '#0D1117'
+                },
+                baseMode: { main: '#242A30', contrastText: '#FFFFFF' },
                 borders: { main: '#E5E6E7', contrastText: '#FFFFFF' },
                 even: { main: '#323A42', contrastText: '#FFFFFF' },
                 odd: { main: '#FFFFFF', contrastText: '#FFFFFF' },

@@ -3,9 +3,9 @@ export interface WidgetTitleClasses {
     root: string;
 }
 export type WidgetTitleClassKey = keyof WidgetTitleClasses;
-// export declare function getWidgetTitleUtilityClass(slot: string): string;
-declare const widgetTitleClasses: WidgetTitleClasses;
-export { widgetTitleClasses };
+export declare function getWidgetTitleUtilityClass(slot: string): string;
+// declare const widgetTitleClasses: WidgetTitleClasses;
+// export { widgetTitleClasses };
 
 
 export interface WidgetFooterTextClasses {
@@ -13,6 +13,6 @@ export interface WidgetFooterTextClasses {
     root: string;
 }
 export type WidgetFooterTextClassKey = keyof WidgetFooterTextClasses;
-// export declare function getWidgetFooterTextUtilityClass(slot: string): string;
-declare const widgetFooterTextClasses: WidgetFooterTextClasses;
-export { widgetFooterTextClasses };
+export declare function getWidgetFooterTextUtilityClass(slot: string): string;
+// declare const widgetFooterTextClasses: WidgetFooterTextClasses;
+// export { widgetFooterTextClasses };

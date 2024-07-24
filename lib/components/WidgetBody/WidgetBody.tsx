@@ -18,9 +18,7 @@ const Root = styled(Box, {
 			paddingX,
 			paddingY,
 		},
-	}) => { debugger;
-        console.log(theme);
-        return ({
+	}) => ({
 		width: '100%',
 		display: 'flex',
 		alignItems: 'center',
@@ -31,15 +29,14 @@ const Root = styled(Box, {
 		// ...theme.typography.body1,
 		...{
 			backgroundColor:
-				theme.palette[variant != 'default' ? variant : 'widget'].main,
-			color: theme.palette[variant != 'default' ? variant : 'widget']
+				theme.palette[variant != 'default' ? variant : 'baseMode'].main,
+			color: theme.palette[variant != 'default' ? variant : 'baseMode']
 				.contrastText,
 			padding: `${
 				paddingY ?? (fullArea || fullHeight ? '0px' : '2rem')
 			} ${paddingX ?? (fullArea || fullWidth ? '0px' : '1.5rem')}`,
 		},
 	})
-}
 );
 
 const WidgetBody: ForwardRefExoticComponent<PropsWithoutRef<WidgetBodyProps> & RefAttributes<HTMLDivElement>> = forwardRef((inProps: WidgetBodyProps, ref) => {

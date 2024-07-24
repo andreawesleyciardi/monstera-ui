@@ -19,7 +19,7 @@ const Root = styled(Box, {
 		...theme.typography.body1,
 		...{
 			backgroundColor:
-				theme.palette[variant != 'default' ? variant : 'widget'].main,
+				theme.palette[variant != 'default' ? variant : 'baseMode'].main,
 		},
 	})
 );

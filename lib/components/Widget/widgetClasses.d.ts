@@ -4,5 +4,5 @@ export interface WidgetClasses {
 }
 export type WidgetClassKey = keyof WidgetClasses;
 export declare function getWidgetUtilityClass(slot: string): string;
-declare const widgetClasses: WidgetClasses;
-export default widgetClasses;
+// declare const widgetClasses: WidgetClasses;
+// export default widgetClasses;

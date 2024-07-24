@@ -4,8 +4,8 @@ import InfoIcon from '@mui/icons-material/Info';
 import { Tooltip } from './Tooltip';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-const meta = {
-	title: 'Components/Atoms/Tooltip',
+const meta: Meta<typeof Tooltip> = {
+	title: 'Components/Tooltip',
 	component: Tooltip,
 	parameters: {
 		
@@ -20,10 +20,11 @@ const meta = {
         children: <InfoIcon color="primary" />,
         title: 'Tooltip content'
 	},
-} satisfies Meta<typeof Tooltip>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof Tooltip>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Basic: Story = {

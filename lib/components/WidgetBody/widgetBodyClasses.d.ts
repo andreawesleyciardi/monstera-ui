@@ -3,6 +3,6 @@ export interface WidgetBodyClasses {
     root: string;
 }
 export type WidgetBodyClassKey = keyof WidgetBodyClasses;
-// export declare function getWidgetBodyUtilityClass(slot: string): string;
-declare const widgetBodyClasses: WidgetBodyClasses;
-export default widgetBodyClasses;
+export declare function getWidgetBodyUtilityClass(slot: string): string;
+// declare const widgetBodyClasses: WidgetBodyClasses;
+// export default widgetBodyClasses;

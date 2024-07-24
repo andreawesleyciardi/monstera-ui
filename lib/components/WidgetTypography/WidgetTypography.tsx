@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, } from 'react';
 import { styled, useThemeProps } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 
@@ -13,28 +13,28 @@ const Title = styled(Typography, {
 	fontFamily: 'inherit',
 }));
 
-export const WidgetTitle = React.forwardRef<HTMLSpanElement, WidgetTitleProps>(
-	function WidgetTitle(inProps, ref) {
-		const { children, ...props } = useThemeProps({
-			props: inProps,
-			name: 'MuiWidgetTitle',
-		});
+const WidgetTitle: ForwardRefExoticComponent<PropsWithoutRef<WidgetTitleProps> & RefAttributes<HTMLSpanElement>> = forwardRef((inProps: WidgetTitleProps, ref) => {
+	const { children, ...props } = useThemeProps({
+		props: inProps,
+		name: 'MuiWidgetTitle',
+	});
+    
+	const ownerState = { ...props };
 
-		const ownerState = { ...props };
+	return (
+		<Title
+			className="MuiWidgetTitle"
+			{...props}
+			ownerState={ownerState}
+			role="widget-title"
+			ref={ref}
+		>
+			{children}
+		</Title>
+	);
+}) as ForwardRefExoticComponent<PropsWithoutRef<WidgetFooterTextProps> & RefAttributes<HTMLSpanElement>>;
 
-		return (
-			<Title
-				className="MuiWidgetTitle"
-				{...props}
-				ownerState={ownerState}
-				role="widget-title"
-				ref={ref}
-			>
-				{children}
-			</Title>
-		);
-	}
-);
+
 
 const Text = styled(Typography, {
 	name: 'MuiWidgetFooterText',
@@ -44,25 +44,25 @@ const Text = styled(Typography, {
 	fontFamily: 'inherit',
 }));
 
-export const WidgetFooterText = React.forwardRef<HTMLSpanElement, WidgetFooterTextProps>(
-	function WidgetFooterText(inProps, ref) {
-		const { children, ...props } = useThemeProps({
-			props: inProps,
-			name: 'MuiWidgetFooterText',
-		});
+const WidgetFooterText: ForwardRefExoticComponent<PropsWithoutRef<WidgetFooterTextProps> & RefAttributes<HTMLSpanElement>> = forwardRef((inProps: WidgetFooterTextProps, ref) => {
+	const { children, ...props } = useThemeProps({
+		props: inProps,
+		name: 'MuiWidgetFooterText',
+	});
 
-		const ownerState = { ...props };
+	const ownerState = { ...props };
 
-		return (
-			<Text
-				className="MuiWidgetFooterText"
-				{...props}
-				ownerState={ownerState}
-				role="widget-footer-text"
-				ref={ref}
-			>
-				{children}
-			</Text>
-		);
-	}
-);
+	return (
+		<Text
+			className="MuiWidgetFooterText"
+			{...props}
+			ownerState={ownerState}
+			role="widget-footer-text"
+			ref={ref}
+		>
+			{children}
+		</Text>
+	);
+}) as ForwardRefExoticComponent<PropsWithoutRef<WidgetFooterTextProps> & RefAttributes<HTMLSpanElement>>;
+
+export { WidgetTitle, WidgetFooterText }

@@ -1,6 +1,6 @@
 export { default } from './Widget';
 export * from './Widget.d';
-export * from './Widget.defaults';
+export * from './Widget.theme';
 
-export { default as widgetClasses } from './widgetClasses';
-export * from './widgetClasses';
+// export { default as widgetClasses } from './widgetClasses.d';
+export * from './widgetClasses.d';

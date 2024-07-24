@@ -1,6 +1,6 @@
 export { default } from './WidgetActions';
 export * from './WidgetActions.d';
-export * from './WidgetActions.defaults';
+export * from './WidgetActions.theme';
 
-export { default as widgetActionsClasses } from './widgetActionsClasses';
-export * from './widgetActionsClasses';
+// export { default as widgetActionsClasses } from './widgetActionsClasses.d';
+export * from './widgetActionsClasses.d';

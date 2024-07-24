@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Chip } from './Chip';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-const meta = {
-	title: 'Components/Atoms/Chip',
+const meta: Meta<typeof Chip> = {
+	title: 'Components/Chip',
 	component: Chip,
 	parameters: {
 		
@@ -22,10 +22,11 @@ const meta = {
 		square: { control: 'boolean', defaultValue: false, table: {defaultValue: {summary: 'false'}} },
 		variant: { control: 'radio', options: ['filled', 'outlined'], defaultValue: 'filled', table: {defaultValue: {summary: 'filled'}} },
 	},
-} satisfies Meta<typeof Chip>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof Chip>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Default: Story = {

@@ -2,8 +2,8 @@ import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, 
 import { Box } from '@mui/material';
 import { styled, useThemeProps } from '@mui/material/styles';
 
-import { WidgetHeaderProps } from './Widget.types';
-import { WidgetTitle } from './WidgetTypography';
+import { WidgetHeaderProps } from './WidgetHeader.d';
+import { WidgetTitle } from './../WidgetTypography';
 
 const Root = styled(Box, {
 	name: 'MuiWidgetHeader',
@@ -22,8 +22,8 @@ const Root = styled(Box, {
 		boxSizing: 'border-box',
 		...{
 			backgroundColor:
-				theme.palette[variant != 'default' ? variant : 'widget'].main,
-			color: theme.palette[variant != 'default' ? variant : 'widget']
+				theme.palette[variant != 'default' ? variant : 'baseMode'].main,
+			color: theme.palette[variant != 'default' ? variant : 'baseMode']
 				.contrastText,
 		},
 	})

@@ -31,12 +31,12 @@ const preview: Preview = {
                     error: { main: '#9B2757', contrastText: '#FFFFFF' },
                     warnings: { main: '#FF7300', contrastText: '#FFFFFF' },
                     info: { main: '#D8C193', contrastText: '#FFFFFF' },
-                    success: { main: '#96D5D0', contrastText: '#FFFFFF' },
+                    success: { main: '#FF0000', contrastText: '#FFFFFF' },
                 }
             };
 
             return (
-                <ThemeProvider {...(context.args?.theme != null ? _.merge({}, context.args, { theme: { branding: branding }}, (context.args?.theme?.branding ?? {})) : {})}>
+                <ThemeProvider {...(context.args?.theme != null ? _.merge({}, context.args, { theme: { branding: branding }}, (context.args?.theme?.branding ?? {})) : {theme: { branding: branding }})}>
                     <Content>
                         <Story />
                     </Content>

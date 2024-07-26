@@ -80,7 +80,7 @@ const ThemeProvider: any = ({
 	);
 };
 
-const useTheme = (): ThemeContextProps => {
+const useTheme = (): ThemeContextProps | null => {
 	const themeContext = useContext(ThemeContext);
 	return themeContext;
 };

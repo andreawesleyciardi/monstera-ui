@@ -185,35 +185,6 @@ declare module '@mui/material/Typography' {
 
 export type PaletteMode = MuiPaletteMode | 'auto';
 
-// export type ThemeProviderThemeOptions = MuiThemeOptions & {
-//     branding?: {
-//         appName?: string;
-//         companyName?: string;
-//         logo?: string | { [key: string]: string };
-//         logosRootUrl?: string;
-//         palette?: MuiPaletteOptions;
-//         [key: string]: any;
-//     };
-//     icons?: {
-//         add?: React.FunctionComponent<SvgIconProps>;
-//         copy?: React.FunctionComponent<SvgIconProps>;
-//         delete?: React.FunctionComponent<SvgIconProps>;
-//         edit?: React.FunctionComponent<SvgIconProps>;
-//         export?: React.FunctionComponent<SvgIconProps>;
-//         filter?: React.FunctionComponent<SvgIconProps>;
-//         firstPage?: React.FunctionComponent<SvgIconProps>;
-//         info?: React.FunctionComponent<SvgIconProps>;
-//         lastPage?: React.FunctionComponent<SvgIconProps>;
-//         nextPage?: React.FunctionComponent<SvgIconProps>;
-//         previousPage?: React.FunctionComponent<SvgIconProps>;
-//         remove?: React.FunctionComponent<SvgIconProps>;
-//         search?: React.FunctionComponent<SvgIconProps>;
-//         sort?: React.FunctionComponent<SvgIconProps>;
-//         [key: string]: React.FunctionComponent<SvgIconProps> | null | undefined;
-//     };
-// }
-
-// export type ThemeProviderThemeProps = ThemeProviderThemeOptions | ((mode: MuiPaletteMode) => ThemeProviderThemeOptions);
 export type ThemeProviderThemeProps = MuiThemeOptions | ((mode: MuiPaletteMode) => MuiThemeOptions);
 
 export type ThemeProviderProps = {
@@ -227,3 +198,7 @@ export type ThemeContextProps = {
     togglePaletteMode: () => void;
     toggleIsBranded: () => void;
 };
+
+
+
+// DEVIL MAY CRY song

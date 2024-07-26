@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { useThemeProps } from '@mui/material/styles';
 import {
 	TextField as MonsteraUiTextField,
-} from 'components';
+} from './../../../../../components';
 import _ from 'lodash';
 
 import { ControlledTextFieldProps } from './TextField.types';

@@ -1,6 +1,6 @@
 import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, } from 'react';
 import { Box } from '@mui/material';
-import { styled, useThemeProps } from '@mui/material/styles';
+import { Palette, PaletteColor, styled, useThemeProps } from '@mui/material/styles';
 
 import { WidgetHeaderProps } from './WidgetHeader.d';
 import { WidgetTitle } from './../WidgetTypography';
@@ -21,10 +21,8 @@ const Root = styled(Box, {
 		position: 'relative',
 		boxSizing: 'border-box',
 		...{
-			backgroundColor:
-				theme.palette[variant != 'default' ? variant : 'baseMode'].main,
-			color: theme.palette[variant != 'default' ? variant : 'baseMode']
-				.contrastText,
+			backgroundColor: (theme.palette[(variant != 'default' ? variant : 'baseMode') as keyof Palette] as PaletteColor).main as string,
+                color: (theme.palette[(variant != 'default' ? variant : 'baseMode') as keyof Palette] as PaletteColor).contrastText as string,
 		},
 	})
 );

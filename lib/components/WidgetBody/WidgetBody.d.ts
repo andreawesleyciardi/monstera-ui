@@ -1,3 +1,4 @@
+import { Palette } from '@mui/material/styles';
 import { BoxProps } from '@mui/material/Box';
 
 export interface WidgetBodyProps extends BoxProps {

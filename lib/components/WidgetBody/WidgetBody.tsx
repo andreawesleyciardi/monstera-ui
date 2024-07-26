@@ -1,6 +1,6 @@
 import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, } from 'react';
 import { Box } from '@mui/material';
-import { styled, useThemeProps } from '@mui/material/styles';
+import { Palette, PaletteColor, styled, useThemeProps } from '@mui/material/styles';
 
 import { WidgetBodyProps, WidgetBodyOwnerState } from './WidgetBody.d';
 
@@ -18,25 +18,25 @@ const Root = styled(Box, {
 			paddingX,
 			paddingY,
 		},
-	}) => ({
-		width: '100%',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		flex: '1 1',
-		position: 'relative',
-		boxSizing: 'border-box',
-		// ...theme.typography.body1,
-		...{
-			backgroundColor:
-				theme.palette[variant != 'default' ? variant : 'baseMode'].main,
-			color: theme.palette[variant != 'default' ? variant : 'baseMode']
-				.contrastText,
-			padding: `${
-				paddingY ?? (fullArea || fullHeight ? '0px' : '2rem')
-			} ${paddingX ?? (fullArea || fullWidth ? '0px' : '1.5rem')}`,
-		},
-	})
+	}) => {
+        return {
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: '1 1',
+            position: 'relative',
+            boxSizing: 'border-box',
+            // ...theme.typography.body1,
+            ...{
+                backgroundColor: (theme.palette[(variant != 'default' ? variant : 'baseMode') as keyof Palette] as PaletteColor).main as string,
+                color: (theme.palette[(variant != 'default' ? variant : 'baseMode') as keyof Palette] as PaletteColor).contrastText as string,
+                padding: `${
+                    paddingY ?? (fullArea || fullHeight ? '0px' : '2rem')
+                } ${paddingX ?? (fullArea || fullWidth ? '0px' : '1.5rem')}`,
+            },
+        }
+    }
 );
 
 const WidgetBody: ForwardRefExoticComponent<PropsWithoutRef<WidgetBodyProps> & RefAttributes<HTMLDivElement>> = forwardRef((inProps: WidgetBodyProps, ref) => {
